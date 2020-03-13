@@ -17,8 +17,7 @@ import kotlinx.android.synthetic.main.fila.view.*
 import androidx.core.view.get
 import cl.pdm.felipebesoain.gamecharacterlist.Card
 import com.google.firebase.FirebaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 
 class AddCardActivity : AppCompatActivity() {
@@ -29,15 +28,27 @@ class AddCardActivity : AppCompatActivity() {
     lateinit var cardExplanation: EditText
     lateinit var btn_add_card: Button
 
+    lateinit var myListView: ListView
+
+    lateinit var cardList: MutableList<Card>
+    lateinit var ref: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_user_activity)
+
+        cardList = mutableListOf()
+        ref = FirebaseDatabase.getInstance().getReference("cards")
 
         // get reference to button
         cardName = findViewById(R.id.cardName)
         cardTopic = findViewById(R.id.cardTopic)
         cardTitle = findViewById(R.id.cardTitle)
         cardExplanation = findViewById(R.id.cardExplanation)
+        //listView = findViewById(R.id.listViewXML)
+        myListView = findViewById(R.id.myListViewXML)
+
+
 
         btn_add_card = findViewById(R.id.newCard) as Button
         // set on-click listener
@@ -46,6 +57,31 @@ class AddCardActivity : AppCompatActivity() {
             saveCard()
 
         }
+
+        ref.addValueEventListener(object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                if(p0!!.exists())
+                {
+                    cardList.clear()
+                    for(h in p0.children)
+                    {
+                        val card = h.getValue(Card::class.java)
+                        cardList.add(card!!)
+                    }
+                }
+
+                val adapter = CardAdapter(applicationContext,R.layout.cards,cardList)
+                myListView.adapter = adapter
+
+            }
+
+
+        })
+
     }
 
      private  fun  saveCard()
@@ -72,7 +108,6 @@ class AddCardActivity : AppCompatActivity() {
              return
          }
 
-         val ref = FirebaseDatabase.getInstance().getReference("cards")
 
          val cardsId = ref.push().key
          val card = Card(cardsId!!, name!!, topic!!, title!!, explanation!!)

@@ -4,8 +4,12 @@ import android.media.Image
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class Card(val CardsId: String,val Name:String, val Topic: String,val Title: String,val Explanation: String){
+class Card(val cardsId: String,val name:String, val topic: String,val title: String,val explanation: String){
 
+    constructor() : this("","","","","")
+    {
+
+    }
 
     /*var img:Int?=null
     var name:String?=null

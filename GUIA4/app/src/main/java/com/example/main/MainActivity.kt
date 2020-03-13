@@ -28,8 +28,8 @@ import kotlinx.android.synthetic.main.add_user_activity.*
 class MainActivity : AppCompatActivity() {
 
 
-    var listCards = ArrayList<Card>()
-    var ml:myLista?=null
+    //var listCards = ArrayList<Card>()
+    //var ml: myLista? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +49,8 @@ class MainActivity : AppCompatActivity() {
         //listCards.add(Card(R.string))
 
 
-        ml = myLista(this,listCards)
-        listViewXML.adapter = ml
+        //ml = myLista(this,listCards)
+        //listViewXML.adapter = ml
 
         // get reference to button
         val btn_add_PJ = findViewById(R.id.newPJ) as Button
@@ -73,11 +73,11 @@ class MainActivity : AppCompatActivity() {
         }*/
 
         //listViewXML.setOnItemLongClickListener(AdapterView.OnItemLongClickListener { parent, view, position, id ->
-            // TODO Auto-generated method stub
+        // TODO Auto-generated method stub
 
-            //listViewXML.adapter.remove(position)
+        //listViewXML.adapter.remove(position)
 
-            /*for (x in 0..listViewXML.count)
+        /*for (x in 0..listViewXML.count)
             {
                 if(listViewXML.get(x) == listViewXML[position])
                     listPersonaje.remove(listViewXML.get(x))
@@ -95,10 +95,15 @@ class MainActivity : AppCompatActivity() {
             listPersonaje.removeAt(position)
             ml!!.notifyDataSetChanged()
         }*/
+
+
+    }
+}
+        /*
         listViewXML.setOnItemLongClickListener { adapter, view, pos, id ->
             // TODO Auto-generated method stub
 
-            listCards.removeAt(pos)
+            //listCards.removeAt(pos)
             ml!!.notifyDataSetChanged();
             Toast.makeText(this, "Personaje removido.", Toast.LENGTH_SHORT).show()
 
@@ -177,59 +182,20 @@ return myView
 
 }
 
-override fun getItem(position: Int): Any {
-// TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+/*override fun getItem(position: Int): Any {
 return this.listPersonaje[position]
 }
 
 override fun getItemId(position: Int): Long {
-// TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 
 return position.toLong()
 }
 
 override fun getCount(): Int {
-// TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 return this.listPersonaje.size
 }
 
 
-}
-    /* private  fun  saveCard()
-     {
-         val name = cardName.text.toString.trim()
-         val topic = editTextTopic.text.toString.trim()
-         val title = editTextTitle.text.toString.trim()
-         val explanation = editTextExplanation.text.toString.trim()
-         //val image = editTextName.text.toString.trim()
-         if(name.isEmpty()){
-             editTextName.error = "please, enter a name"
-             return
-         }
-         if(topic.isEmpty()){
-             editTextTopic.error = "please, enter a topic"
-             return
-         }
-         if(title.isEmpty()){
-             editTextTitle.error = "please, enter a title"
-             return
-         }
-         if(explanation.isEmpty()){
-             editTextExplanation.error = "please, enter a explanation"
-             return
-         }
+}*/
 
-         val ref = FirebaseDatabase.getInstance().getReference("cards")
-
-         val cardsId = ref.push().key
-         val card = Card(cardsId!!, name!!, topic!!, title!!, explanation!!)
-
-         ref.child(cardsId).setValue(card).addOnCompleteListener{
-             Toast.makeText(applicationContext,"card save",Toast.LENGTH_SHORT).show()
-         }
-
-     }
-
-     */
-
-}
+}     */
