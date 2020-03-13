@@ -75,6 +75,14 @@ class MyMainActivity : AppCompatActivity() {
 
                 btn_sign_out.isEnabled = true
 
+                val intent = Intent(this@MyMainActivity, MainActivity::class.java)
+                    /*.apply {
+                    putExtra("entering data", "work")
+                }*/
+                //intent.putExtra("EXTRA_SESSION_ID", sessionId)
+                startActivity(intent)
+
+
             }else
             {
                 Toast.makeText(this,""+ response!!.error!!.message,Toast.LENGTH_SHORT).show()
