@@ -1,6 +1,9 @@
 package com.example.main
 
 import android.app.Activity
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -27,6 +30,20 @@ class MyMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_activity_main)
+
+        var calendar:Calendar = Calendar.getInstance()
+
+        calendar.set(Calendar.HOUR_OF_DAY,23)
+        calendar.set(Calendar.MINUTE,52)
+        calendar.set(Calendar.SECOND,0)
+
+        var intent = Intent(applicationContext,Notification_receiver::class.java)
+
+        var pendingIntent: PendingIntent = PendingIntent.getBroadcast(applicationContext,100,intent,PendingIntent.FLAG_UPDATE_CURRENT)
+
+        var alarmManager:AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.timeInMillis,AlarmManager.INTERVAL_DAY,pendingIntent)
 
         providers = Arrays.asList<AuthUI.IdpConfig> (
             AuthUI.IdpConfig.EmailBuilder().build(), //Email Login
@@ -76,6 +93,7 @@ class MyMainActivity : AppCompatActivity() {
                 btn_sign_out.isEnabled = true
 
                 val intent = Intent(this@MyMainActivity, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     /*.apply {
                     putExtra("entering data", "work")
                 }*/
@@ -91,6 +109,8 @@ class MyMainActivity : AppCompatActivity() {
         }
 
     }
+
+
 
 
 

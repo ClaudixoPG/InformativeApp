@@ -7,6 +7,19 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SUPPORT"
+        android:textAlignment="center" />
+
+    <ImageButton
+        android:id="@+id/wsp_icon"
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        app:srcCompat="@drawable/whatsapp_icon" />
+
     <Button
         android:id="@+id/newPJ"
         android:layout_width="match_parent"
@@ -16,7 +29,5 @@
     <ListView
         android:id="@+id/listViewXML"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp" />
+        android:layout_height="match_parent" />
 </LinearLayout>
